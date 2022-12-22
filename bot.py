@@ -5,6 +5,7 @@ import tok
 from discord.ext import commands
 client = commands.Bot(command_prefix="$") 
 
+
 @client.command()
 async def helpo(ctx):
     await ctx.send("here are your commands : ")
@@ -14,10 +15,12 @@ async def helpo(ctx):
     await ctx.send("!place <num>: for placing X or O on the board")
     await ctx.send("!end : for ending the game tictactoe")
 
+    
 #Bot commands and functions for guess the number ! 
 pick =False
 x=0
 count=0
+
 
 @client.command()
 async def roll(ctx):
@@ -32,6 +35,7 @@ async def roll(ctx):
     else:
         await ctx.send("A number has already been picked ! -_- guess it first")
 
+        
 @client.command()
 async def g(ctx,p:int):
     global pick
@@ -51,6 +55,7 @@ async def g(ctx,p:int):
     else:
         await ctx.send("No number has been picked yet ! try <!roll> ")
 
+        
 @client.command()
 async def hint(ctx):
     if pick==True:
@@ -80,6 +85,7 @@ winningConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ]
+
 
 @client.command()
 async def tictactoe(ctx, p1: discord.Member, p2: discord.Member): 
@@ -122,6 +128,7 @@ async def tictactoe(ctx, p1: discord.Member, p2: discord.Member):
     else:
         await ctx.send("A game is already in progress! Finish it before starting a new one.")
 
+        
 @client.command()
 async def end(ctx):
     global board
@@ -135,6 +142,7 @@ async def end(ctx):
     else:
         await ctx.send("The game has not started yet :moyai:")
 
+        
 @client.command()
 async def place(ctx, pos:  int):
     global turn
@@ -187,12 +195,14 @@ async def place(ctx, pos:  int):
         await ctx.send("Please start a new game using the !tictactoe command.")
 
 
+#       
 def checkWinner(winningConditions, mark):
     global gameOver
     for condition in winningConditions:
         if board[condition[0]] == mark and board[condition[1]] == mark and board[condition[2]] == mark:
             gameOver = True
 
+              
 @tictactoe.error
 async def tictactoe_error(ctx, error):
     print(error)
@@ -201,6 +211,7 @@ async def tictactoe_error(ctx, error):
     elif isinstance(error, commands.BadArgument):
         await ctx.send("Please make sure to mention/ping players (ie. <@688534433879556134>).")
 
+        
 @place.error
 async def place_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
@@ -209,86 +220,3 @@ async def place_error(ctx, error):
         await ctx.send("Please make sure to enter an integer.")
 
 client.run(tok.TOKEN)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# async def send_message(message, user_message, is_private):
-#     try:
-#         response = responses.handle_response(user_message)
-#         await message.author.send(response) if is_private else await message.channel.send(response)
-#     except Exception as e:
-#         print(e)
-
-# async def guess_the_number(message, user_message):
-#     global x
-#     x = random.randint(1,100) 
-#     try:
-#         response = responses.handle_response(user_message)
-#         if response == 'start':
-#             return "Guess a number from 1 to 100:"
-#         if int(response) == x:
-#             return "Yes you've guessed the number correctly!"
-#         elif response !=x:
-#             return "You've guessed incorrectly"
-#     except Exception as e1:
-#         print(e1)
-
-# def run_discord_bot():
-#     TOKEN = 'MTA0MzUyMTQzODU5MTc0NjE4OQ.GRsf4P.dfK-cNt871y2QDL8EuAarcnTOqr2BS0SsEHUSw'
-#     client = discord.Client()
-
-#     @client.event
-#     async def on_ready():
-#         print(f'{client.user} is now running!')
-
-#     @client.event
-#     async def on_message(message):
-#         if message.author == client.user:
-#             return 
-        
-#         username = str(message.author)
-#         user_message = str(message.content)
-#         channel = str(message.channel) 
-
-#         print(f"{username} said: '{user_message}' ({channel})")
-#         if user_message =="?startgame":
-#             await send_message(message,user_message,is_private=False)
-#         elif user_message[0]== '?':
-#             user_message = user_message[1:]
-#             await send_message(message, user_message, is_private=True)
-#         else:
-#             await send_message(message, user_message, is_private=False)
-
-    # @client.event
-    # async def on_message(message):
-    #     if message.author == client.user:
-    #         return 
-        
-    #     username = str(message.author)
-    #     user_message = str(message.content)
-    #     channel = str(message.channel)
-
-        # print(f"{username} said: '{user_message}' ({channel})")
-        # if user_message=='start':
-        #     await 
