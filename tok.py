@@ -1,1 +1,1 @@
-TOKEN = 'MTA0MzUyMTQzODU5MTc0NjE4OQ.GRsf4P.dfK-cNt871y2QDL8EuAarcnTOqr2BS0SsEHUSw'
+TOKEN = "Paste the token of your discord bot here" #wumpus ;-;
